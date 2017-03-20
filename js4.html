@@ -1,0 +1,61 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+  </head>
+<body>
+</body>
+
+	<input id="in" type="text"> 
+	<!-- <input type="submit" value="左侧入">
+	<input type="submit" value="右侧入"> -->
+	<button name="left" onclick="left_in()">左侧入</button>
+	
+	<button name="right" onclick="right_in()">右侧入</button>
+
+	<button name="left" onclick="left_out()">左侧出</button>
+	<button name="right" onclick="right_out()">右侧出</button>
+	<button name="show">右侧出</button>
+	<div id="demo"></div>
+	<script type="text/javascript">
+		var line = [];
+		function show() {
+			// body...
+			//打印1.0版
+			var x=document.getElementById("demo");
+			x.innerHTML=line;
+		}
+		show();
+		function left_in() {
+			// body...
+			//在头插入元素
+			var input = document.getElementById("in").value;
+			console.log(input);
+			line.unshift(input);
+			show();
+		}
+		function right_in() {
+			// body...
+			//在尾部插入元素
+			var input = document.getElementById("in").value;
+			console.log(input);
+			line.push(input);
+			show();
+		}
+		function left_out() {
+			// body...
+			//删除第一个元素
+			var output = line.shift();
+			alert(output);
+			show();
+		}
+		function right_out(){
+			//删除最后一个元素
+			var output = line.pop();
+			alert(output);
+			show();
+		}
+
+	</script>
+</html>
