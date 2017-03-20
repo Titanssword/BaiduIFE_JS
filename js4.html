@@ -20,11 +20,40 @@
 	<div id="demo"></div>
 	<script type="text/javascript">
 		var line = [];
+		function onClick(i){
+			var temp = document.getElementById("item-"+i).value;
+			console.log(temp);
+			// var id = temp.id;
+			// temp.addEventListener('click',function(){
+			// 	num = id.
+			// });
+		}
+		function Delete(){
+			var x=document.getElementById("demo");
+			x.removeChild(this);
+		}
+
 		function show() {
 			// body...
 			//打印1.0版
-			var x=document.getElementById("demo");
-			x.innerHTML=line;
+			var y=document.getElementById("demo");
+			y.innerHTML=line;
+			//打印2.0版
+			line.forEach(function(x,i){
+				span = document.createElement("button");
+				span.innerHTML = x;
+				span.id = "item-" + i;
+				demo.appendChild(span);
+				span.onclick = Delete 
+
+				// span.addEventListener('click',function(){
+				// 	var temp = document.getElementById("item-"+i).value;
+				// 	//console.log(temp);
+				// 	alert(temp)
+				// })
+
+				
+			})
 		}
 		show();
 		function left_in() {
