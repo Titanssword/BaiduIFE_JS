@@ -67,20 +67,21 @@
 		}
 		function line_sort_selection() {
 			// body...
-			for(var i=0;i<line.length;i++){
-				temp_index = i;
-				for(j=i+1;j<line.length;j++){
-					if(line[i]>line[j]){
-						temp_index = j;
+			for(var i2=0;i2<line.length;i2++){
+				temp_index = i2;
+				for(var j2=i2+1;j2<line.length;j2++){
+					if(line[i2] > line[j2]){
+						temp_index = j2;
 					}
 
 				}
 				temp =  line[temp_index];
-				line[temp_index] = line[i];
-				line[i] = temp;
-
+				line[temp_index] = line[i2];
+				line[i2] = temp;
+				console.log(line[i2]);
+				console.log(line);
 			}
-			console.log(line);
+
 			draw(line);
 		}
 		function show() {
@@ -173,18 +174,18 @@
         // 指定图表的配置项和数据
         var option = {
             title: {
-                text: 'ECharts 入门示例'
+                text: '排序'
             },
             tooltip: {},
             legend: {
-                data:['销量']
+                data:['数值']
             },
             xAxis: {
                 data: line
             },
             yAxis: {},
             series: [{
-                name: '销量',
+                name: '数值',
                 type: 'bar',
                 data: line
             }]
