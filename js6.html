@@ -13,11 +13,13 @@
 	<input type="text" name="rearch">
 	<br>
 	<button onclick="rearch_by()">查询</button>
+	<div id = "tex"></div>
 	<script type="text/javascript">
 		function rearch_by() {
 			// body...
 			var input  = document.querySelector("textarea").value;
 			console.log(input);
+			var inputDOM = document.querySelector("textarea");
 			var rearch = document.querySelector("input").value;
 			console.log(rearch);
 			var flag = input.indexOf(rearch);
@@ -26,7 +28,17 @@
 			}else{
 				console.log("false");
 			}
-			
+			var text = document.createElement("p");
+			text1 = input.substring(0,flag);
+			text2 = input.substring(flag+rearch.length,input.length);
+			console.log(text1);
+			console.log(text2);
+			// input.replace(rearch,"<font color=red>rearch</font>");
+			haha = document.getElementById(tex);
+			//<p><font color="red">This is some text!</font></p>
+			inputDOM.innerHTML=text1+'<p><font color="red">'+rearch+'</font></p>'+text2+'hou';
+			//tex.innerHTML=text1+'<h2 class="color=red">'+rearch+'</h2>'+text2;
+
 		}
 		
 	</script>
