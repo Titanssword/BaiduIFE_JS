@@ -69,13 +69,15 @@
 			// body...
 			for(var i2=0;i2<line.length;i2++){
 				temp_index = i2;
+				min = line[i2];
 				for(var j2=i2+1;j2<line.length;j2++){
-					if(line[i2] > line[j2]){
+					if(min > line[j2]){
+						min = line[j2];
 						temp_index = j2;
 					}
 
 				}
-				temp =  line[temp_index];
+				temp =  min;
 				line[temp_index] = line[i2];
 				line[i2] = temp;
 				console.log(line[i2]);
