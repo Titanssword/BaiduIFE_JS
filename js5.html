@@ -19,10 +19,12 @@
 	<div id="main" style="width: 600px;height:400px;"></div>
 	<button name="sort" onclick="line_sort_bubble()">冒泡排序</button>
 	<button name="sort" onclick="line_sort_selection()">选择排序</button>
-	<button name="sort" onclick="line_sort_bubble()">插入排序</button>
+	<button name="sort" onclick="line_sort_insert()">插入排序</button>
 	<script src="http://echarts.baidu.com/dist/echarts.min.js"></script>
 	<script type="text/javascript">
 		var line = [64,12,96,48,20,63,25,60,90];
+		// 基于准备好的dom，初始化echarts实例
+	    var myChart = echarts.init(document.getElementById('main'));
 		function onClick(i){
 
 			var temp = document.getElementById("item-"+i).value;
@@ -56,8 +58,11 @@
 						这里有问题,就是 循环内 使用echarts重新绘图 想 通过暂停的方式 实现排序的内部清楚的过程，然而 只能等到循环结束之后才
 						可以绘制
 						*/
-						//sleep(3000);
-						draw(line);
+						sleep(3000);
+						var option = myChart.getOption();
+						option.series[0].data = line;
+						myChart.setOption(option);
+						//draw(line);
 
 						
 					}
@@ -84,6 +89,16 @@
 				console.log(line);
 			}
 
+			draw(line);
+		}
+		function line_sort_insert(){
+			for (var i = 0; i < line.length; i++) {
+				value = line[i];
+				for (var j = i-1; j > -1&&line[j] >value; j--) {
+					line[j+1] = line[j];
+				}
+				line[j+1] = value;
+			}
 			draw(line);
 		}
 		function show() {
@@ -169,32 +184,32 @@
 			alert(output);
 			show();
 		}
+		
 		function draw(line){
-    		// 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('main'));
+    		
+	        // 指定图表的配置项和数据
+	        var option = {
+	            title: {
+	                text: '排序'
+	            },
+	            tooltip: {},
+	            legend: {
+	                data:['数值']
+	            },
+	            xAxis: {
+	                data: line
+	            },
+	            yAxis: {},
+	            series: [{
+	                name: '数值',
+	                type: 'bar',
+	                data: line
+	            }]
+	        };
 
-        // 指定图表的配置项和数据
-        var option = {
-            title: {
-                text: '排序'
-            },
-            tooltip: {},
-            legend: {
-                data:['数值']
-            },
-            xAxis: {
-                data: line
-            },
-            yAxis: {},
-            series: [{
-                name: '数值',
-                type: 'bar',
-                data: line
-            }]
-        };
+	        // 使用刚指定的配置项和数据显示图表。
+	        myChart.setOption(option);
 
-        // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
     	}
 
 	</script>
