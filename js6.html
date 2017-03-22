@@ -1,0 +1,34 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+  </head>
+<body>
+
+
+	
+	<textarea id= "text" rows="20" cols="200"></textarea>
+	<br>
+	<input type="text" name="rearch">
+	<br>
+	<button onclick="rearch_by()">查询</button>
+	<script type="text/javascript">
+		function rearch_by() {
+			// body...
+			var input  = document.querySelector("textarea").value;
+			console.log(input);
+			var rearch = document.querySelector("input").value;
+			console.log(rearch);
+			var flag = input.indexOf(rearch);
+			if(flag>=0){
+				console.log(flag);
+			}else{
+				console.log("false");
+			}
+			
+		}
+		
+	</script>
+	</body>
+</html>
