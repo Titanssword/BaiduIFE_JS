@@ -1,0 +1,209 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 07</title>
+    <!-- <link rel="stylesheet" type="text/css" href="css/css7.css"> -->
+  </head>
+  <style type="text/css">
+  	body {
+	  display: -webkit-box;
+	  display:-moz-box;
+	  box-orient: vertical;
+	  box-direction: reverse;
+	  color: white;
+	}
+	#box1{
+	    background: red;
+	    height: 100px;
+	    width: 80px;
+	    
+	}
+	#box2{
+	    background: black;
+	    height: 100px;
+	    width: 80px;
+	}
+	#box3{
+	    background: blue;
+	    height: 100px;
+	    width: 80px;
+	}
+	#tree{
+	    display: flex;
+	    border: 1px solid black;
+	    width: 1000px;
+	    height: 200px;
+	    justify-content: space-around;
+	    
+	}
+	#tree div{	    
+	    display: flex;
+	    border: 1px solid black;
+	    width:44%;
+	    height: 70%;  
+	    margin: auto 0;
+	    justify-content: space-around;
+	}
+    </style>
+</head>
+<body>
+
+    <!-- <ul class="flex-container">
+	  <li class="flex-item">1</li>
+	  <li class="flex-item">2</li>
+	  <li class="flex-item">3</li>
+	  <li class="flex-item">4</li>
+	  <li class="flex-item">5</li>
+	  <li class="flex-item">6</li>
+	</ul> -->
+
+	<!-- <p>
+		                   0
+		             A            H
+		         B      E      I     L
+		      C   D   F   G   J  K  M  N
+	</p> -->
+	<br>
+	<div id="tree" value="0">
+		<!-- <span>0</span> -->
+	    <div value="A">
+	    	<!-- <span>A</span> -->
+	        <div value="B">
+	        	
+	            <div value="C"></div>
+	            <div value="D"></div>
+	        </div>
+	        <div value="E">
+	        	
+	            <div value="F"></div>
+	            <div value="G"></div>
+	        </div>  
+	    </div>
+	    <div value="H">
+	    	
+	        <div value="I">
+	        
+	            <div value="J"></div>
+	            <div value="K"></div>
+	        </div>
+	        <div value="L">
+	       
+	            <div value="M"></div>
+	            <div value="N"></div>
+	        </div>      
+	    </div>
+	</div>
+	<button onclick="pre()">前序遍历</button>
+	<button onclick="mid()">中序遍历</button>
+	<button onclick="post()">后序遍历</button>
+	<script type="text/javascript">
+		//存value值
+		var arr1=[];
+		var arr2=[];
+		var arr3=[];
+		//存节点
+		var arrNodes1 = [];
+		var arrNodes2 = [];
+		var arrNodes3 = [];
+		var Root_node = document.getElementById("tree");
+		// console.log(Root_node.getElementsByTagName("span")[0].innerText);
+		// console.log(Root_node.childNodes[1].innerText);
+		// console.log(Root_node.firstElementChild);
+		// console.log(Root_node.childNodes[3]);
+
+		// console.log(Root_node.lastElementChild.innerText);
+		//console.log(Root_node.children);
+		console.log(Root_node.getAttribute("value"));
+		console.log(Root_node.firstElementChild);
+		console.log(Root_node.lastElementChild);
+		function pre_order(node) {
+			// body...
+			//前序遍历
+			if(node!=null){
+				arr1.push(node.getAttribute("value"));
+				arrNodes1.push(node);
+				pre_order(node.firstElementChild);
+				pre_order(node.lastElementChild);
+			}
+		}
+		function mid_order(node){
+			//中序遍历
+			if(node!=null){
+				mid_order(node.firstElementChild);
+				arr2.push(node.getAttribute("value"));
+				arrNodes2.push(node);
+				mid_order(node.lastElementChild);
+			}
+		}
+		function post_order(node){
+			//后序遍历
+			if(node!=null){
+				post_order(node.firstElementChild);
+				post_order(node.lastElementChild);
+				arr3.push(node.getAttribute("value"));
+				arrNodes3.push(node);
+			}
+		}
+		pre_order(Root_node);
+		mid_order(Root_node);
+		post_order(Root_node);
+		console.log(arr1);
+		console.log(arr2);
+		console.log(arr3);
+		function lonely(num){
+			if(num-1 >= 0) {
+	                    arrNodes2[num-1].style.backgroundColor = "white";
+	                }
+			arrNodes2[num].style.backgroundColor = "red";
+		}
+		function show1(argument) {
+			// body...
+			for(var i = 0;i<arrNodes1.length;i++){
+				setTimeout((function(num){
+            		return function() {
+	                if(num-1 >= 0) {
+	                    arrNodes1[num-1].style.backgroundColor = "white";
+	                }
+	                arrNodes1[num].style.backgroundColor = "green";
+		            }
+		        })(i), i*1000);
+			}
+		}
+		function show2(argument) {
+			// body...
+			for(var i = 0;i<arrNodes2.length;i++){
+				setTimeout((function(num){
+            		return function() {
+	                if(num-1 >= 0) {
+	                    arrNodes2[num-1].style.backgroundColor = "white";
+	                }
+	                arrNodes2[num].style.backgroundColor = "blue";
+		            }
+		        })(i), i*1000);
+			}
+		}
+		function show3(argument) {
+			// body...
+			for(var i = 0;i<arrNodes3.length;i++){
+				setTimeout((function(num){
+            		return function() {
+	                if(num-1 >= 0) {
+	                    arrNodes3[num-1].style.backgroundColor = "white";
+	                }
+	                arrNodes3[num].style.backgroundColor = "red";
+		            }
+		        })(i), i*1000);
+			}
+		}
+		function pre(){
+			show1();
+		}
+		function mid(){
+			show2();
+		}
+		function post(){
+			show3();
+		}
+	</script>
+</body>
+</html>
