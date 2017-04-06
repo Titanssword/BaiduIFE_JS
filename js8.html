@@ -1,0 +1,257 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 07</title>
+    <!-- <link rel="stylesheet" type="text/css" href="css/css7.css"> -->
+  </head>
+  <style type="text/css">
+  	body {
+	  display: -webkit-box;
+	  display:-moz-box;
+	  box-orient: vertical;
+	  box-direction: reverse;
+	  color: white;
+	}
+	#box1{
+	    background: red;
+	    height: 100px;
+	    width: 80px;
+	    
+	}
+	#box2{
+	    background: black;
+	    height: 100px;
+	    width: 80px;
+	}
+	#box3{
+	    background: blue;
+	    height: 100px;
+	    width: 80px;
+	}
+	#tree{
+	    display: flex;
+	    border: 1px solid black;
+	    width: 1000px;
+	    height: 200px;
+	    justify-content: space-around;
+	    
+	}
+	#tree div{	    
+	    display: flex;
+	    border: 1px solid black;
+	    width:44%;
+	    height: 70%;  
+	    margin: auto 0;
+	    justify-content: space-around;
+	}
+    </style>
+</head>
+<body>
+
+    <!-- <ul class="flex-container">
+	  <li class="flex-item">1</li>
+	  <li class="flex-item">2</li>
+	  <li class="flex-item">3</li>
+	  <li class="flex-item">4</li>
+	  <li class="flex-item">5</li>
+	  <li class="flex-item">6</li>
+	</ul> -->
+
+	<!-- <p>
+		                   0
+		             A            H
+		         B      E      I     L
+		      C   D   F   G   J  K  M  N
+	</p> -->
+	<br>
+
+	<!-- 说明 文字使用span标签嵌套在div的第一个子节点上 这样方便进行同一操作， -->
+	<div id="tree" value="0">
+		<span color="blue">Super</span>
+	    <div value="A">
+	    	<!-- <span>A</span> -->
+	    	<span>Car</span>
+	        <div value="B">
+	        	<span>Apple</span>
+	            <div value="C"><span>bear</span></div>
+	            <div value="D"><span>pig</span></div>
+	            <div value="C"><span>coa</span></div>
+	            <div value="D"><span>soccor</span></div>
+	        </div>
+	        <div value="E">
+	        	<span>phone</span>
+	        </div>  
+	        <div>
+	        	<span></span>
+	        	<div>
+	        		<span>book</span>
+	        	</div>
+	        	<div>
+	        		<span>school</span>
+	        	</div>
+	        	
+	        </div>
+	    </div>
+	    <div value="H">
+	    	<span>note</span>
+	        <div value="I">
+	        	<span>human</span>
+	            <div value="J"><span>code</span></div>
+	            <div value="K"><span>operate</span></div>
+	            <div><span>man</span></div>
+	        </div>
+	        <div value="L">
+	       	<span>program</span>
+	            <div value="M">
+	            	<span>bement</span>
+	            	<div>
+	            	<span>
+	            		cat
+	            	</span>
+	            	</div>
+
+	            </div>
+	            <div value="N">
+	            	<span>grass</span>
+	            </div>
+	        </div> 
+	                
+	    </div>
+	    <div>
+	        	<span>Fish</span>     
+	    </div>
+	</div>
+	<button onclick="DF_show()">DF遍历</button>
+	<button onclick="BF_show()">BF遍历</button>
+	
+	<script type="text/javascript">
+		//存value值
+		var arr1=[];
+		var arr2=[];
+
+		//queue 队列
+		var queue = [];
+
+		//存节点
+		var arrNodes1 = [];
+		var arrNodes2 = [];
+
+		var Root_node = document.getElementById("tree");
+		// console.log(Root_node.getElementsByTagName("span")[0].innerText);
+		// console.log(Root_node.childNodes[1].innerText);
+		// console.log(Root_node.firstElementChild);
+		// console.log(Root_node.childNodes[3]);
+
+		// console.log(Root_node.lastElementChild.innerText);
+		//console.log(Root_node.children);
+		//console.log(Root_node.);
+		console.log(Root_node.firstElementChild.innerText);
+		console.log(Root_node.children.length);
+
+		//super,car ,note
+		console.log(Root_node.children[0]);
+		console.log(Root_node.children[1].firstElementChild.innerText);
+		console.log(Root_node.children[2].firstElementChild.innerText);
+		console.log(Root_node.lastElementChild);
+		function DF(node){
+			var length = node.children.length;
+			if(node.firstElementChild!=null){
+				//arr1 存储的是 文字内容
+				arr1.push(node.firstElementChild.innerText);
+				//arrNode1 存储的是 节点 ，进行动态赋值颜色的时候使用
+				arrNodes1.push(node);
+			}
+			
+			for(var i = 1;i<length;i++){
+				
+				DF(node.children[i]);
+			}
+		}
+		
+		DF(Root_node);
+		console.log("DF:"+arr1);
+		
+		function BF_re(node){
+			var length = node.children.length;
+			// arr2.push(node.firstElementChild.innerText);
+			for(var i = 1;i<length;i++){
+				arr2.push(node.children[i].firstElementChild.innerText);
+				
+			}
+			for(var i=1;i<length;i++){
+				BF_re(node.children[i]);
+			}
+			
+
+		}
+
+		function BF(node){
+
+			//queue 作为 层次 遍历的存储队列
+			arr2.push(node.firstElementChild.innerText);
+			arrNodes2.push(node);
+			queue.push(node);
+			//console.log(queue);
+			var length = node.children.length;
+			for(var i=1;i<length;i++){
+			 	//console.log(node.children[i]);
+			 	queue.push(node.children[i]);
+			}
+			console.log(queue);
+			console.log(queue.shift());
+			while(queue.length!=0){
+				var temp = queue.shift();
+				arr2.push(temp.firstElementChild.innerText);
+				arrNodes2.push(temp);
+				var len2 = temp.children.length;
+				console.log(len2);
+				if(len2>1){
+					for(var j= 1;j<len2;j++){
+						queue.push(temp.children[j]);
+					}
+				}
+				
+			}
+		}
+		BF(Root_node);
+		console.log("BF:"+arr2);
+		
+
+		//根据深度遍历的得到的数组进行 背景颜色的改变
+		function show1(argument) {
+			// body...
+			for(var i = 0;i<arrNodes1.length;i++){
+				setTimeout((function(num){
+            		return function() {
+	                if(num-1 >= 0) {
+	                    arrNodes1[num-1].style.backgroundColor = "";
+	                }
+	                arrNodes1[num].style.backgroundColor = "green";
+		            }
+		        })(i), i*1000);
+			}
+		}
+		function show2(argument) {
+			// body...
+			for(var i = 0;i<arrNodes2.length;i++){
+				setTimeout((function(num){
+            		return function() {
+	                if(num-1 >= 0) {
+	                    arrNodes2[num-1].style.backgroundColor = "";
+	                }
+	                arrNodes2[num].style.backgroundColor = "blue";
+		            }
+		        })(i), i*1000);
+			}
+		}
+		
+		function DF_show(){
+			show1();
+		}
+		function BF_show(){
+			show2();
+		}
+		
+	</script>
+</body>
+</html>

@@ -58,11 +58,15 @@
 						这里有问题,就是 循环内 使用echarts重新绘图 想 通过暂停的方式 实现排序的内部清楚的过程，然而 只能等到循环结束之后才
 						可以绘制
 						*/
-						sleep(3000);
-						var option = myChart.getOption();
-						option.series[0].data = line;
-						myChart.setOption(option);
+						
+						// sleep(3000);
+						// var option = myChart.getOption();
+						// option.series[0].data = line;
+						// myChart.setOption(option);
 						//draw(line);
+
+						//setTimeout(code,millisec)
+						setTimeout(1000,draw(line));
 
 						
 					}
